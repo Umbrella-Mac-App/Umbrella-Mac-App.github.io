@@ -156,33 +156,64 @@
 <body class="min-h-screen flex flex-col justify-between selection:bg-brandRed selection:text-white">
 
     <!-- Header / Navbar -->
-    <header class="w-full max-w-7xl mx-auto px-6 lg:px-16 pt-8 pb-4 flex items-center justify-between">
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-3 group">
-            <div class="relative w-9 h-9 flex items-center justify-center">
-                <img src="/images/Umbrella.png" style="width:36px; height:36px;" alt="Umbrella Logo">
+    <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 pt-6 sm:pt-8 pb-4 relative z-30">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+                    <img src="/images/Umbrella.png" class="w-8 h-8 sm:w-9 sm:h-9" alt="Umbrella Logo">
+                </div>
+                <span class="font-extrabold text-xl sm:text-2xl tracking-wider text-darkGreen group-hover:opacity-90 transition-opacity">
+                    Umbrella
+                </span>
+            </a>
+
+            <!-- Navigation Links & Action Buttons -->
+            <div class="flex items-center gap-4 md:gap-8 lg:gap-12">
+                <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-base font-semibold text-gray-700">
+                    <a href="/" class="hover:text-brandRed transition-colors">Home</a>
+                    <a href="#features" class="hover:text-brandRed transition-colors">Features</a>
+                    <a href="mailto:threcius@gmail.com?subject=Umbrella%20App%20Support" class="hover:text-brandRed transition-colors">Contact</a>
+                </nav>
+
+                <div class="hidden sm:flex items-center gap-3 sm:gap-4">
+                    <!-- Buy Button -->
+                    <a href="/buy" class="px-5 sm:px-6 py-2 sm:py-2.5 rounded-full border-2 border-brandRed text-brandRed font-bold text-xs sm:text-sm hover:bg-brandRed hover:text-white transition-all duration-200">
+                        Buy
+                    </a>
+                    
+                    <!-- Navbar Download Button -->
+                    <button type="button" onclick="openDownloadModal()" class="masked-btn masked-btn-red px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm">
+                        <span class="masked-btn-text">
+                            Download
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button type="button" onclick="toggleMobileMenu()" class="md:hidden text-darkGreen p-2 rounded-lg hover:bg-darkGreen/5 focus:outline-none">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            <span class="font-extrabold text-2xl tracking-wider text-darkGreen group-hover:opacity-90 transition-opacity">
-                Umbrella
-            </span>
-        </a>
+        </div>
 
-        <!-- Navigation Links & Action Buttons -->
-        <div class="flex items-center gap-8 md:gap-12">
-            <nav class="hidden md:flex items-center gap-8 text-base font-semibold text-gray-700">
-                <a href="/" class="hover:text-brandRed transition-colors">Home</a>
-                <a href="#features" class="hover:text-brandRed transition-colors">Features</a>
-                <a href="mailto:threcius@gmail.com?subject=Umbrella%20App%20Support" class="hover:text-brandRed transition-colors">Contact</a>
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 pb-2 border-t border-darkGreen/10 flex flex-col gap-4">
+            <nav class="flex flex-col gap-3 text-base font-semibold text-gray-700">
+                <a href="/" class="hover:text-brandRed transition-colors py-1">Home</a>
+                <a href="#features" onclick="toggleMobileMenu()" class="hover:text-brandRed transition-colors py-1">Features</a>
+                <a href="mailto:threcius@gmail.com?subject=Umbrella%20App%20Support" class="hover:text-brandRed transition-colors py-1">Contact</a>
             </nav>
-
-            <div class="flex items-center gap-3 sm:gap-4">
-                <!-- Buy Button -->
-                <a href="/buy" class="px-6 py-2.5 rounded-full border-2 border-brandRed text-brandRed font-bold text-sm hover:bg-brandRed hover:text-white transition-all duration-200">
+            <div class="flex sm:hidden items-center gap-3 pt-2">
+                <a href="/buy" class="flex-1 text-center py-2.5 rounded-full border-2 border-brandRed text-brandRed font-bold text-xs">
                     Buy
                 </a>
-                
-                <!-- Navbar Download Button with Mask and Trigger Modal -->
-                <button type="button" onclick="openDownloadModal()" class="masked-btn masked-btn-red px-6 py-2.5 text-sm">
+                <button type="button" onclick="openDownloadModal(); toggleMobileMenu();" class="flex-1 masked-btn masked-btn-red py-2.5 text-xs">
                     <span class="masked-btn-text">
                         Download
                     </span>
@@ -192,21 +223,21 @@
     </header>
 
     <!-- Main Hero Section -->
-    <main class="w-full max-w-7xl mx-auto px-6 lg:px-16 py-8 my-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-8 sm:py-12 my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
         <!-- Hero Left Column: Content -->
-        <div class="lg:col-span-5 flex flex-col justify-center space-y-8 z-10">
-            <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-darkGreen leading-[1.12] tracking-tight">
+        <div class="lg:col-span-5 flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-6 sm:space-y-8 z-10">
+            <h1 class="text-3xl sm:text-5xl lg:text-[56px] font-extrabold text-darkGreen leading-[1.15] lg:leading-[1.12] tracking-tight">
                 Capture audio from any app on macOS
             </h1>
 
-            <p class="text-mutedGrey text-base sm:text-lg leading-relaxed max-w-md font-medium">
+            <p class="text-mutedGrey text-sm sm:text-lg leading-relaxed max-w-md font-medium">
                 Seamlessly isolate and capture per-app audio—Spotify, Zoom, Safari, Discord, or Logic and other apps straight into MP3 or high-efficiency AAC files with zero latency. 
             </p>
 
-            <div>
-                <!-- Hero Download Button with Mask and Trigger Modal -->
-                <button type="button" onclick="openDownloadModal()" class="masked-btn masked-btn-hero px-9 py-4 text-base tracking-wide">
+            <div class="w-full sm:w-auto">
+                <!-- Hero Download Button -->
+                <button type="button" onclick="openDownloadModal()" class="w-full sm:w-auto masked-btn masked-btn-hero px-8 sm:px-9 py-3.5 sm:py-4 text-sm sm:text-base tracking-wide">
                     <span class="masked-btn-text">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -217,25 +248,25 @@
             </div>
         </div>
 
-        <!-- Hero Right Column -->
-        <div class="lg:col-span-7 flex justify-center items-center w-full min-h-[460px] sm:min-h-[540px]">
-          <img src="/images/umbrella_screenshot.png" alt="Umbrella Screenshot">
+        <!-- Hero Right Column (Original dimensions preserved) -->
+        <div class="lg:col-span-7 flex justify-center items-center overflow-x-auto">
+            <img src="/images/umbrella_screenshot.png" alt="Umbrella Screenshot" class="max-w-none flex-shrink-0">
         </div>
 
     </main>
 
     <!-- Features Section -->
-    <section id="features" class="w-full max-w-7xl mx-auto px-6 lg:px-16 py-16 sm:py-24">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-tealGreen mb-3">Powerful Capabilities</h2>
-            <p class="text-3xl sm:text-4xl font-extrabold text-darkGreen tracking-tight">
+    <section id="features" class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-12 sm:py-24">
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-tealGreen mb-2 sm:mb-3">Powerful Capabilities</h2>
+            <p class="text-2xl sm:text-4xl font-extrabold text-darkGreen tracking-tight">
                 Everything you need to control and capture macOS audio
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <!-- Feature 1 -->
-            <div class="feature-card p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
+            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
                 <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
@@ -248,7 +279,7 @@
             </div>
 
             <!-- Feature 2 -->
-            <div class="feature-card p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
+            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
                 <div class="w-12 h-12 rounded-2xl bg-brandRed/10 flex items-center justify-center text-brandRed mb-6">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
@@ -261,7 +292,7 @@
             </div>
 
             <!-- Feature 3 -->
-            <div class="feature-card p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
+            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
                 <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
@@ -274,7 +305,7 @@
             </div>
 
             <!-- Feature 4 -->
-            <div class="feature-card p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
+            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
                 <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -292,7 +323,7 @@
             </div>
 
             <!-- Feature 5 -->
-            <div class="feature-card p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
+            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
                 <div class="w-12 h-12 rounded-2xl bg-brandRed/10 flex items-center justify-center text-brandRed mb-6">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
@@ -305,7 +336,7 @@
             </div>
 
             <!-- Feature 6 (Placeholder) -->
-            <div class="feature-card p-8 rounded-3xl border border-dashed border-darkGreen/20 flex flex-col bg-white/50 backdrop-blur-sm">
+            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-dashed border-darkGreen/20 flex flex-col bg-white/50 backdrop-blur-sm">
                 <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -328,7 +359,7 @@
     <div id="download-modal" class="hidden-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-darkGreen/40 backdrop-blur-md" onclick="handleBackdropClick(event)">
         <div id="modal-content" class="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 max-w-md w-full border border-darkGreen/10 relative">
             <!-- Close Button -->
-            <button onclick="closeDownloadModal()" class="absolute top-5 right-5 text-gray-400 hover:text-darkGreen transition-colors p-1 rounded-full">
+            <button onclick="closeDownloadModal()" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-gray-400 hover:text-darkGreen transition-colors p-1 rounded-full">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -341,54 +372,64 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
                 </div>
-                <h3 class="text-2xl font-extrabold text-darkGreen">Choose your Mac Architecture</h3>
-                <p class="text-mutedGrey text-sm font-medium mt-1">Select the version optimized for your system</p>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-darkGreen">Choose your Mac Architecture</h3>
+                <p class="text-mutedGrey text-xs sm:text-sm font-medium mt-1">Select the version optimized for your system</p>
             </div>
 
             <!-- Download Options -->
             <div class="space-y-3">
                 <!-- Apple Silicon Button -->
-                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/release/Umbrella.Silicon.dmg" class="group flex items-center justify-between p-4 rounded-2xl border border-darkGreen/10 hover:border-tealGreen hover:bg-tealGreen/5 transition-all duration-200">
+                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/release/Umbrella.Silicon.dmg" class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-darkGreen/10 hover:border-tealGreen hover:bg-tealGreen/5 transition-all duration-200">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-darkGreen/5 group-hover:bg-tealGreen group-hover:text-white text-darkGreen flex items-center justify-center transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-darkGreen/5 group-hover:bg-tealGreen group-hover:text-white text-darkGreen flex items-center justify-center transition-colors flex-shrink-0">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 3.84c.64-.78 1.08-1.85.96-2.94-.93.04-2.07.62-2.74 1.4-.6.69-1.12 1.79-.98 2.86 1.04.08 2.12-.54 2.76-1.32z"/>
                             </svg>
                         </div>
                         <div class="text-left">
-                            <div class="font-bold text-darkGreen group-hover:text-tealGreen transition-colors">Apple Silicon</div>
-                            <div class="text-xs text-mutedGrey font-medium">M1, M2, M3, M4 or newer</div>
+                            <div class="font-bold text-darkGreen group-hover:text-tealGreen transition-colors text-sm sm:text-base">Apple Silicon</div>
+                            <div class="text-[11px] sm:text-xs text-mutedGrey font-medium">M1, M2, M3, M4 or newer</div>
                         </div>
                     </div>
-                    <span class="text-xs font-bold text-tealGreen bg-tealGreen/10 px-3 py-1 rounded-full">Download</span>
+                    <span class="text-xs font-bold text-tealGreen bg-tealGreen/10 px-2.5 sm:px-3 py-1 rounded-full flex-shrink-0 ml-2">Download</span>
                 </a>
 
                 <!-- Intel Chip Button -->
-                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/release/Umbrella.Intel.dmg" class="group flex items-center justify-between p-4 rounded-2xl border border-darkGreen/10 hover:border-brandRed hover:bg-brandRed/5 transition-all duration-200">
+                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/release/Umbrella.Intel.dmg" class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-darkGreen/10 hover:border-brandRed hover:bg-brandRed/5 transition-all duration-200">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-darkGreen/5 group-hover:bg-brandRed group-hover:text-white text-darkGreen flex items-center justify-center transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-darkGreen/5 group-hover:bg-brandRed group-hover:text-white text-darkGreen flex items-center justify-center transition-colors flex-shrink-0">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
                             </svg>
                         </div>
                         <div class="text-left">
-                            <div class="font-bold text-darkGreen group-hover:text-brandRed transition-colors">Intel Chip</div>
-                            <div class="text-xs text-mutedGrey font-medium">Older Intel-based Macs</div>
+                            <div class="font-bold text-darkGreen group-hover:text-brandRed transition-colors text-sm sm:text-base">Intel Chip</div>
+                            <div class="text-[11px] sm:text-xs text-mutedGrey font-medium">Older Intel-based Macs</div>
                         </div>
                     </div>
-                    <span class="text-xs font-bold text-brandRed bg-brandRed/10 px-3 py-1 rounded-full">Download</span>
+                    <span class="text-xs font-bold text-brandRed bg-brandRed/10 px-2.5 sm:px-3 py-1 rounded-full flex-shrink-0 ml-2">Download</span>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Footer Space -->
-    <footer class="w-full max-w-7xl mx-auto px-6 lg:px-16 py-8 text-center text-xs text-mutedGrey">
+    <footer class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-6 sm:py-8 text-center text-xs text-mutedGrey">
         &copy; 2026 Pixel Egg Studio. All rights reserved.
     </footer>
 
-    <!-- Modal Logic JavaScript -->
+    <!-- Modal Logic & Navigation JavaScript -->
     <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-icon-open');
+            const closeIcon = document.getElementById('menu-icon-close');
+            
+            menu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
         function openDownloadModal() {
             const modal = document.getElementById('download-modal');
             modal.classList.remove('hidden-modal');
