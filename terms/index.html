@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — Umbrella for macOS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"SF Pro Display"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        ::selection {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-[#fafafa] text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- Minimalist Navbar -->
+    <header class="sticky top-0 z-50 bg-[#fafafa]/80 backdrop-blur-md border-b border-slate-200/60">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- App Logo & Name -->
+            <a href="https://umbrella.pixelegg.me/" class="flex items-center space-x-3 group">
+                <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
+                    <svg class="w-4.5 h-4.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v13.5m0 0a2.5 2.5 0 105 0m-5 0a2.5 2.5 0 11-5 0M4 12a8 8 0 0116 0H4z"/>
+                    </svg>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="font-bold text-base tracking-tight text-slate-900">Umbrella</span>
+                    <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-200/60 text-slate-700 border border-slate-300/60">macOS</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center space-x-6 text-xs font-medium">
+                <a href="https://umbrella.pixelegg.me/" class="text-slate-500 hover:text-slate-900 transition-colors">
+                    Home
+                </a>
+                <a href="./index.html" class="text-slate-500 hover:text-slate-900 transition-colors">
+                    Privacy Policy
+                </a>
+                <span class="text-slate-900 font-semibold border-b border-slate-900 py-0.5">
+                    Terms of Service
+                </span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-3xl mx-auto px-6 py-16 flex-grow w-full">
+        
+        <!-- Document Title Banner -->
+        <header class="mb-14 pb-8 border-b border-slate-200/60">
+            <div class="inline-flex items-center space-x-2 px-2.5 py-1 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-md mb-4 shadow-2xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
+                <span>Software License & Usage Terms</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">Terms of Service</h1>
+            <p class="text-base text-slate-600 leading-relaxed mb-4">
+                Please review these Terms of Service before downloading, installing, or purchasing a license for Umbrella.
+            </p>
+            <p class="text-xs text-slate-400 font-medium">
+                Effective Date: November 2026 &bull; Applies to Umbrella for macOS (<a href="https://umbrella.pixelegg.me/" class="hover:text-slate-700 underline">umbrella.pixelegg.me</a>)
+            </p>
+        </header>
+
+        <!-- Legal Disclaimer Highlight Box -->
+        <div class="bg-white border border-slate-200/80 rounded-xl p-5 mb-12 shadow-2xs">
+            <h2 class="text-sm font-semibold text-slate-900 mb-1 flex items-center">
+                <svg class="w-4 h-4 mr-2 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Important Notice regarding Audio Recording Compliance
+            </h2>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Umbrella provides audio routing and recording tools on your Mac. You are solely responsible for adhering to applicable local, national, and international laws regarding recording consent, wiretapping, and privacy when recording communications or calls.
+            </p>
+        </div>
+
+        <!-- Terms Sections Container -->
+        <div class="space-y-12">
+
+            <!-- Section 1: Acceptance -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">1. Acceptance of Terms</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    By downloading, installing, activating, or using the Umbrella application ("Software"), provided via <a href="https://umbrella.pixelegg.me/" class="text-slate-900 underline font-medium">umbrella.pixelegg.me</a>, you agree to be bound by these Terms of Service.
+                </p>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    If you do not agree to these terms, do not install or use the Software.
+                </p>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 2: Software License Grant -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">2. Software License Grant</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    Subject to your compliance with these Terms and valid payment of applicable licensing fees, PixelEgg grants you a non-exclusive, non-transferable license to use Umbrella:
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 leading-relaxed">
+                    <li><strong>Personal & Commercial Use:</strong> You may use Umbrella on compatible macOS computers that you personally own or control.</li>
+                    <li><strong>License Scope:</strong> Each purchased license key permits activation on up to the number of devices specified at checkout.</li>
+                    <li><strong>Restrictions:</strong> You may not reverse engineer, decompile, disassemble, redistribute, rent, lease, or sub-license the Software or any portion thereof.</li>
+                </ul>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 3: Audio Recording & Compliance -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">3. Audio Recording & Legal Compliance</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    Umbrella acts purely as a local utility enabling application-level and system-level audio capture on macOS.
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 leading-relaxed">
+                    <li><strong>User Responsibility:</strong> You represent and warrant that your use of Umbrella will comply with all legal requirements in your jurisdiction concerning call recording, audio eavesdropping, and consent laws (including one-party or two-party/all-party consent regulations).</li>
+                    <li><strong>No Responsibility for Misuse:</strong> PixelEgg assumes no liability for illegal or unauthorized audio captures executed using Umbrella.</li>
+                </ul>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 4: Merchant of Record & Payments -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">4. Merchant of Record & Payment Terms</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    All payment processing, order fulfillment, tax calculations, and license distribution for Umbrella are conducted through <strong>FastSpring</strong> (FastSpring.com Market Ltd or its subsidiaries), our Merchant of Record.
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 leading-relaxed">
+                    <li>Purchases are subject to FastSpring’s Customer Terms and Conditions.</li>
+                    <li>Refund requests, billing disputes, and chargebacks are governed by FastSpring's standard policies.</li>
+                </ul>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 5: System Requirements -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">5. System Requirements & Hardware Compatibility</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    Umbrella relies on native macOS Core Audio and System Audio Recording frameworks. It requires a supported version of macOS to operate properly.
+                </p>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    While we strive for continuous software compatibility across macOS releases, system updates made by Apple Inc. may occasionally impact core audio sub-systems or require Software updates.
+                </p>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 6: Intellectual Property -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">6. Intellectual Property Rights</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    All title, ownership rights, code, branding, logos, and intellectual property in and to Umbrella belong exclusively to PixelEgg. All rights not expressly granted herein are reserved.
+                </p>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 7: Disclaimer & Limitation of Liability -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">7. Disclaimer of Warranties & Limitation of Liability</h2>
+                <div class="p-4 bg-white border border-slate-200/80 rounded-xl mb-4 text-xs font-mono text-slate-700 leading-relaxed">
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+                </div>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    In no event shall PixelEgg be liable for any indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, loss of data, audio corruption, or business interruption) arising out of the use or inability to use Umbrella, even if advised of the possibility of such damage. In all cases, maximum aggregate liability shall be limited to the license fees paid by you for the Software.
+                </p>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 8: Changes & Governing Law -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">8. Modifications & Contact</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                    We reserve the right to revise these Terms of Service at any time. Updates will be posted on this page with an updated effective date. Continued use of the Software following any changes constitutes acceptance of those revisions.
+                </p>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                    For questions or support regarding these terms:
+                </p>
+                <a href="mailto:threcius@gmail.com" class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 text-xs font-medium rounded-lg transition-colors shadow-xs">
+                    <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span>threcius@gmail.com</span>
+                </a>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Minimalist Footer -->
+    <footer class="border-t border-slate-200/60 bg-[#fafafa] py-10">
+        <div class="max-w-3xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 space-y-4 sm:space-y-0">
+            <div class="flex items-center space-x-2">
+                <span>© 2026 Umbrella by PixelEgg. All rights reserved.</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="https://umbrella.pixelegg.me/" class="hover:text-slate-900 transition-colors">Home</a>
+                <a href="/privacy" class="hover:text-slate-900 transition-colors">Privacy Policy</a>
+                <a href="mailto:threcius@gmail.com" class="hover:text-slate-900 transition-colors">Support</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
