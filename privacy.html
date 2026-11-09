@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Umbrella for macOS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"SF Pro Display"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        ::selection {
+            background-color: rgb(250, 246, 234);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-[#fafafa] text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- Minimalist Navbar -->
+    <header class="sticky top-0 z-50 bg-[#fafafa]/80 backdrop-blur-md border-b border-slate-200/60">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- App Logo & Name -->
+            <a href="https://umbrella.pixelegg.me/" class="flex items-center space-x-3 group">
+                <div class="flex items-center space-x-2">
+                    <span class="font-bold text-base tracking-tight text-slate-900">Umbrella</span>
+                    <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-200/60 text-slate-700 border border-slate-300/60">macOS</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center space-x-6">
+                <a href="https://umbrella.pixelegg.me/" class="text-xs font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                    Home
+                </a>
+                <span class="text-xs font-semibold text-slate-900 border-b border-slate-900 py-0.5">
+                    Privacy Policy
+                </span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-3xl mx-auto px-6 py-16 flex-grow w-full">
+        
+        <!-- Document Title Banner -->
+        <header class="mb-14 pb-8 border-b border-slate-200/60">
+            <div class="inline-flex items-center space-x-2 px-2.5 py-1 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-md mb-4 shadow-2xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>Privacy First Architecture</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">Privacy Policy</h1>
+            <p class="text-base text-slate-600 leading-relaxed mb-4">
+                Umbrella is built with a local-first philosophy. We believe your audio streams, app activity, and recordings belong solely to you on your local Mac.
+            </p>
+            <p class="text-xs text-slate-400 font-medium">
+                Effective Date: November 2026 &bull; Applies to Umbrella for macOS (<a href="https://umbrella.pixelegg.me/" class="hover:text-slate-700 underline">umbrella.pixelegg.me</a>)
+            </p>
+        </header>
+
+        <!-- Core Commitment Highlight Box -->
+        <div class="bg-white border border-slate-200/80 rounded-xl p-5 mb-12 shadow-2xs">
+            <h2 class="text-sm font-semibold text-slate-900 mb-1 flex items-center">
+                <svg class="w-4 h-4 mr-2 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                Summary of Core Principles
+            </h2>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Umbrella processes 100% of audio on-device using native macOS Core Audio APIs. We do not operate remote processing servers, do not transmit recorded audio over the internet, and do not track or sell your app usage data.
+            </p>
+        </div>
+
+        <!-- Privacy Sections Container -->
+        <div class="space-y-12">
+
+            <!-- Section 1: Introduction -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">1. Introduction & Core Principle</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    This Privacy Policy outlines how Umbrella handles information when you use our macOS desktop application. Umbrella is designed as a standalone system audio utility.
+                </p>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Unlike web-based recorders or cloud services, Umbrella operates completely offline on your physical hardware. We do not collect personal identifiers, track software workflow patterns, or retain logs of your audio activity.
+                </p>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 2: Audio Stream Capture -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">2. Audio Stream Capture & Process Taps</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    To capture application audio (such as isolating sound from Safari, Chrome, Zoom, Spotify, or Discord), Umbrella requests standard macOS System Audio Recording permissions via native frameworks (such as Core Audio and ScreenCaptureKit).
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 leading-relaxed">
+                    <li><strong>In-Memory Processing:</strong> Application audio streams are captured and routed strictly within your Mac's RAM for encoding.</li>
+                    <li><strong>Explicit Target Selection:</strong> Umbrella only captures audio from applications or input channels you explicitly select in the interface.</li>
+                    <li><strong>Zero Cloud Streaming:</strong> No audio buffers, fragments, or live feeds are ever streamed or backed up to remote servers.</li>
+                </ul>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 3: Local Storage & File Ownership -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">3. Local Storage & File Ownership</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    When you record audio, Umbrella saves the resulting file (such as MP3 or AAC formats) directly to your local disk in the destination directory you specify (e.g., your Downloads or Music directory).
+                </p>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    You retain total ownership and control over all saved files. Umbrella has no access to your files after they are written, nor do we maintain index catalogs or hidden metadata logs.
+                </p>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 4: Payment & License Verification -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">4. Payment & License Verification</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    License sales and order fulfillments are handled by our Merchant of Record, <strong>FastSpring</strong>. When you purchase a license for Umbrella:
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600 leading-relaxed">
+                    <li>FastSpring securely processes payments, billing information, and applicable tax requirements. Umbrella does not store your credit card or financial details.</li>
+                    <li>This interaction includes minimal metadata (such as your license key and an anonymized hardware identifier) to prevent license abuse. No audio or usage data is ever included in activation calls.</li>
+                </ul>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 5: Telemetry & Analytics -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">5. Telemetry & Analytics</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                    We believe essential utilities should remain light and unobtrusive:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4">
+                    <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-2xs">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Cookies</span>
+                        <span class="text-sm font-semibold text-slate-900">None Used</span>
+                    </div>
+                    <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-2xs">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Telemetry</span>
+                        <span class="text-sm font-semibold text-slate-900">Zero Analytics</span>
+                    </div>
+                    <div class="p-4 bg-white border border-slate-200/80 rounded-xl shadow-2xs">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Ad Tracking</span>
+                        <span class="text-sm font-semibold text-slate-900">No Third-Parties</span>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-slate-200/60" />
+
+            <!-- Section 6: Contact Information -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-900 mb-3 tracking-tight">6. Contact Information</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                    If you have questions, concerns, or technical inquiries regarding this Privacy Policy or Umbrella's local audio handling, please contact us directly:
+                </p>
+                <a href="mailto:threcius@gmail.com" class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 text-xs font-medium rounded-lg transition-colors shadow-xs">
+                    <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span>threcius@gmail.com</span>
+                </a>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Minimalist Footer -->
+    <footer class="border-t border-slate-200/60 bg-[#fafafa] py-10">
+        <div class="max-w-3xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 space-y-4 sm:space-y-0">
+            <div class="flex items-center space-x-2">
+                <span>© 2026 Umbrella by PixelEgg. All rights reserved.</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="https://umbrella.pixelegg.me/" class="hover:text-slate-900 transition-colors">Home</a>
+                <a href="mailto:threcius@gmail.com" class="hover:text-slate-900 transition-colors">Support</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
