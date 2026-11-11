@@ -4,56 +4,318 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Umbrella - Record audio from any app on macOS</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="icon" type="image/png" href="/images/Umbrella.png">
+    
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FAF6EA',
-                        darkGreen: '#0D2D24',
-                        mutedGrey: '#A8A399',
-                        brandRed: '#FF3B2B',
-                        brandRedHover: '#E02E1F',
-                        tealGreen: '#0D8369',
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    }
-                }
+    <style>
+        :root {
+            --bg-cream: #FAF6EA;
+            --dark-green: #0D2D24;
+            --muted-grey: #A8A399;
+            --brand-red: #FF3B2B;
+            --brand-red-hover: #E02E1F;
+            --teal-green: #0D8369;
+            --teal-green-hover: #0A6D56;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            font-family: var(--font-sans);
+            color: var(--dark-green);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: var(--brand-red);
+            color: #ffffff;
+        }
+
+        /* Layout Container */
+        .page-container {
+            width: 100%;
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .page-container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
             }
         }
-    </script>
 
-    <style>
-        body {
-            background-color: #FAF6EA;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #0D2D24;
-            overflow-x: hidden;
+        @media (min-width: 1024px) {
+            .page-container {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
         }
 
-        /* Feature Card Shadow and Hover */
-        .feature-card {
-            background: #ffffff;
-            box-shadow: 0px 10px 30px rgba(13, 45, 36, 0.05);
-            transition: all 0.3s ease;
+        /* Header / Navbar */
+        header {
+            padding-top: 1.5rem;
+            padding-bottom: 1rem;
+            position: relative;
+            z-index: 30;
         }
 
-        .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0px 20px 40px rgba(13, 45, 36, 0.1);
+        @media (min-width: 640px) {
+            header {
+                padding-top: 2rem;
+            }
         }
 
-        /* Custom Animated Mask Buttons tailored to Umbrella's macOS style */
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img-wrapper {
+            position: relative;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) {
+            .logo-img-wrapper {
+                width: 2.25rem;
+                height: 2.25rem;
+            }
+        }
+
+        .logo-img {
+            width: 2rem;
+            height: 2rem;
+            object-fit: contain;
+        }
+
+        @media (min-width: 640px) {
+            .logo-img {
+                width: 2.25rem;
+                height: 2.25rem;
+            }
+        }
+
+        .logo-title {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+            color: var(--dark-green);
+            transition: opacity 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .logo-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .logo-link:hover .logo-title {
+            opacity: 0.9;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-right {
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .nav-right {
+                gap: 3rem;
+            }
+        }
+
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .desktop-nav {
+                gap: 2rem;
+            }
+        }
+
+        .desktop-nav a {
+            color: #374151;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--brand-red);
+        }
+
+        .desktop-actions {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .desktop-actions {
+                display: flex;
+                gap: 1rem;
+            }
+        }
+
+        .btn-buy {
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            border: 2px solid var(--brand-red);
+            color: var(--brand-red);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) {
+            .btn-buy {
+                padding: 0.625rem 1.5rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        .btn-buy:hover {
+            background-color: var(--brand-red);
+            color: #ffffff;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            color: var(--dark-green);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: rgba(13, 45, 36, 0.05);
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        .mobile-menu-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: block;
+        }
+
+        .mobile-menu-btn .hidden {
+            display: none;
+        }
+
+        /* Mobile Dropdown Navigation */
+        .mobile-menu {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+            border-top: 1px solid rgba(13, 45, 36, 0.1);
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-menu.show {
+            display: flex;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .mobile-nav-links a {
+            color: #374151;
+            text-decoration: none;
+            padding: 0.25rem 0;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--brand-red);
+        }
+
+        .mobile-btn-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-top: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .mobile-btn-row {
+                display: none;
+            }
+        }
+
+        .mobile-btn-row .btn-buy,
+        .mobile-btn-row .masked-btn {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Masked Buttons */
         .masked-btn {
             position: relative;
             display: inline-flex;
@@ -64,10 +326,10 @@
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
+            border: none;
             transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Mask Overlay Base */
         .masked-btn::before {
             content: '';
             position: absolute;
@@ -92,30 +354,49 @@
             transform: translateY(-2px);
         }
 
-        /* Red Variant Mask Style */
         .masked-btn-red {
-            background-color: #FF3B2B;
+            background-color: var(--brand-red);
             color: #ffffff;
             box-shadow: 0px 8px 18px rgba(255, 59, 43, 0.25);
+            padding: 0.5rem 1.25rem;
+            font-size: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .masked-btn-red {
+                padding: 0.625rem 1.5rem;
+                font-size: 0.875rem;
+            }
         }
 
         .masked-btn-red::before {
-            background: linear-gradient(135deg, #0D8369 0%, #0D2D24 100%);
+            background: linear-gradient(135deg, var(--teal-green) 0%, var(--dark-green) 100%);
         }
 
         .masked-btn-red:hover {
             box-shadow: 0px 12px 24px rgba(13, 131, 105, 0.35);
         }
 
-        /* Main Hero Mask Style */
         .masked-btn-hero {
             background: linear-gradient(180deg, #139B7D 0%, #0A6D56 100%);
             color: #ffffff;
             box-shadow: 0px 10px 20px rgba(13, 131, 105, 0.3), inset 0px 2px 2px rgba(255, 255, 255, 0.3);
+            padding: 0.875rem 2rem;
+            font-size: 0.875rem;
+            letter-spacing: 0.025em;
+            width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            .masked-btn-hero {
+                padding: 1rem 2.25rem;
+                font-size: 1rem;
+                width: auto;
+            }
         }
 
         .masked-btn-hero::before {
-            background: linear-gradient(135deg, #FF3B2B 0%, #0D2D24 100%);
+            background: linear-gradient(135deg, var(--brand-red) 0%, var(--dark-green) 100%);
         }
 
         .masked-btn-hero:hover {
@@ -127,73 +408,636 @@
             z-index: 2;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
         }
 
-        /* Modal backdrop transition */
+        .masked-btn-text svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* Main Hero Section */
+        main.hero-section {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            margin-top: auto;
+            margin-bottom: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            main.hero-section {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            main.hero-section {
+                grid-template-columns: repeat(12, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+            z-index: 10;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-left {
+                grid-column: span 5 / span 5;
+                align-items: flex-start;
+                text-align: left;
+                gap: 2rem;
+            }
+        }
+
+        .hero-title {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            line-height: 1.15;
+            letter-spacing: -0.025em;
+        }
+
+        @media (min-width: 640px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 56px;
+                line-height: 1.12;
+            }
+        }
+
+        .hero-desc {
+            color: var(--muted-grey);
+            font-size: 0.875rem;
+            line-height: 1.625;
+            max-width: 28rem;
+            font-weight: 500;
+        }
+
+        @media (min-width: 640px) {
+            .hero-desc {
+                font-size: 1.125rem;
+            }
+        }
+
+        .hero-btn-wrapper {
+            width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            .hero-btn-wrapper {
+                width: auto;
+            }
+        }
+
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-right {
+                grid-column: span 7 / span 7;
+            }
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 24rem;
+            height: auto;
+            flex-shrink: 0;
+            object-fit: contain;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-radius: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-img {
+                max-width: 28rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-img {
+                max-width: none;
+                width: auto;
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+
+        /* Features Section */
+        .features-section {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        @media (min-width: 640px) {
+            .features-section {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+            }
+        }
+
+        .features-header {
+            text-align: center;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .features-header {
+                margin-bottom: 4rem;
+            }
+        }
+
+        .features-subtitle {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--teal-green);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .features-subtitle {
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        .features-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            letter-spacing: -0.025em;
+        }
+
+        @media (min-width: 640px) {
+            .features-title {
+                font-size: 2.25rem;
+            }
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: #ffffff;
+            box-shadow: 0px 10px 30px rgba(13, 45, 36, 0.05);
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(13, 45, 36, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 640px) {
+            .feature-card {
+                padding: 2rem;
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0px 20px 40px rgba(13, 45, 36, 0.1);
+        }
+
+        .feature-card-dashed {
+            border-style: dashed;
+            border-color: rgba(13, 45, 36, 0.2);
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon.teal {
+            background-color: rgba(13, 131, 105, 0.1);
+            color: var(--teal-green);
+        }
+
+        .feature-icon.red {
+            background-color: rgba(255, 59, 43, 0.1);
+            color: var(--brand-red);
+        }
+
+        .feature-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--muted-grey);
+            font-size: 0.875rem;
+            line-height: 1.625;
+            font-weight: 500;
+        }
+
+        .feature-title-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-title-row h3 {
+            margin-bottom: 0;
+        }
+
+        .badge-coming-soon {
+            padding: 0.125rem 0.625rem;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 9999px;
+            background-color: rgba(13, 131, 105, 0.1);
+            color: var(--teal-green);
+            flex-shrink: 0;
+        }
+
+        /* Download Modal */
         #download-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-color: rgba(13, 45, 36, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
+
         #download-modal.hidden-modal {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
+
         #download-modal.show-modal {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
         }
+
         #modal-content {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 1.5rem;
+            max-width: 28rem;
+            width: 100%;
+            border: 1px solid rgba(13, 45, 36, 0.1);
+            position: relative;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+
+        @media (min-width: 640px) {
+            #modal-content {
+                padding: 2rem;
+            }
+        }
+
         #download-modal.hidden-modal #modal-content {
             transform: scale(0.9) translateY(12px);
         }
+
         #download-modal.show-modal #modal-content {
             transform: scale(1) translateY(0);
         }
 
-        #privacy {
-            margin-top: 4px;
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #9CA3AF;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 9999px;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        #terms {
-            margin-top: 4px;
+        @media (min-width: 640px) {
+            .modal-close-btn {
+                top: 1.25rem;
+                right: 1.25rem;
+            }
+        }
+
+        .modal-close-btn:hover {
+            color: var(--dark-green);
+        }
+
+        .modal-close-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: block;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
+            background-color: rgba(13, 131, 105, 0.1);
+            color: var(--teal-green);
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-header-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark-green);
+        }
+
+        @media (min-width: 640px) {
+            .modal-header h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .modal-header p {
+            color: var(--muted-grey);
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .modal-header p {
+                font-size: 0.875rem;
+            }
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .arch-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(13, 45, 36, 0.1);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .arch-card {
+                padding: 1rem;
+            }
+        }
+
+        .arch-card:hover {
+            border-color: var(--teal-green);
+            background-color: rgba(13, 131, 105, 0.05);
+        }
+
+        .arch-card.intel:hover {
+            border-color: var(--brand-red);
+            background-color: rgba(255, 59, 43, 0.05);
+        }
+
+        .arch-card-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .arch-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.75rem;
+            background-color: rgba(13, 45, 36, 0.05);
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .arch-card:hover .arch-icon {
+            background-color: var(--teal-green);
+            color: #ffffff;
+        }
+
+        .arch-card.intel:hover .arch-icon {
+            background-color: var(--brand-red);
+            color: #ffffff;
+        }
+
+        .arch-icon svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .arch-info {
+            text-align: left;
+        }
+
+        .arch-name {
+            font-weight: 700;
+            color: var(--dark-green);
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        @media (min-width: 640px) {
+            .arch-name {
+                font-size: 1rem;
+            }
+        }
+
+        .arch-card:hover .arch-name {
+            color: var(--teal-green);
+        }
+
+        .arch-card.intel:hover .arch-name {
+            color: var(--brand-red);
+        }
+
+        .arch-sub {
+            font-size: 11px;
+            color: var(--muted-grey);
+            font-weight: 500;
+            margin-top: 1px;
+        }
+
+        @media (min-width: 640px) {
+            .arch-sub {
+                font-size: 0.75rem;
+            }
+        }
+
+        .arch-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+        }
+
+        .arch-tag.teal {
+            color: var(--teal-green);
+            background-color: rgba(13, 131, 105, 0.1);
+        }
+
+        .arch-tag.red {
+            color: var(--brand-red);
+            background-color: rgba(255, 59, 43, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 1.5rem;
+            padding-bottom: 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--muted-grey);
+        }
+
+        @media (min-width: 640px) {
+            footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                padding-top: 2rem;
+            }
+        }
+
+        footer a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-link-item {
+            margin-top: 0.25rem;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-brandRed selection:text-white">
+<body>
 
     <!-- Header / Navbar -->
-    <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 pt-6 sm:pt-8 pb-4 relative z-30">
-        <div class="flex items-center justify-between">
+    <header>
+        <div class="page-container nav-wrapper">
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
-                    <img src="/images/Umbrella.png" class="w-8 h-8 sm:w-9 sm:h-9" alt="Umbrella Logo">
+            <a href="#" class="logo-link">
+                <div class="logo-img-wrapper">
+                    <img src="/images/Umbrella.png" class="logo-img" alt="Umbrella Logo">
                 </div>
-                <span class="font-extrabold text-xl sm:text-2xl tracking-wider text-darkGreen group-hover:opacity-90 transition-opacity">
+                <span class="logo-title">
                     Umbrella
                 </span>
             </a>
 
             <!-- Navigation Links & Action Buttons -->
-            <div class="flex items-center gap-4 md:gap-8 lg:gap-12">
-                <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-base font-semibold text-gray-700">
-                    <a href="/" class="hover:text-brandRed transition-colors">Home</a>
-                    <a href="#features" class="hover:text-brandRed transition-colors">Features</a>
-                    <a href="mailto:threcius@gmail.com?subject=Umbrella%20App%20Support" class="hover:text-brandRed transition-colors">Contact</a>
+            <div class="nav-right">
+                <nav class="desktop-nav">
+                    <a href="/">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="mailto:threcius@gmail.com?subject=Umbrella%20App%20Support">Contact</a>
                 </nav>
 
-                <div class="hidden sm:flex items-center gap-3 sm:gap-4">
+                <div class="desktop-actions">
                     <!-- Buy Button -->
-                    <a href="/buy" class="px-5 sm:px-6 py-2 sm:py-2.5 rounded-full border-2 border-brandRed text-brandRed font-bold text-xs sm:text-sm hover:bg-brandRed hover:text-white transition-all duration-200">
+                    <a href="/buy" class="btn-buy">
                         Buy
                     </a>
                     
                     <!-- Navbar Download Button -->
-                    <button type="button" onclick="openDownloadModal()" class="masked-btn masked-btn-red px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm">
+                    <button type="button" onclick="openDownloadModal()" class="masked-btn masked-btn-red">
                         <span class="masked-btn-text">
                             Download
                         </span>
@@ -201,11 +1045,11 @@
                 </div>
 
                 <!-- Mobile Menu Toggle Button -->
-                <button type="button" onclick="toggleMobileMenu()" class="md:hidden text-darkGreen p-2 rounded-lg hover:bg-darkGreen/5 focus:outline-none">
-                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button type="button" onclick="toggleMobileMenu()" class="mobile-menu-btn" aria-label="Toggle Menu">
+                    <svg id="menu-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="menu-icon-close" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
@@ -213,17 +1057,17 @@
         </div>
 
         <!-- Mobile Dropdown Navigation -->
-        <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 pb-2 border-t border-darkGreen/10 flex flex-col gap-4">
-            <nav class="flex flex-col gap-3 text-base font-semibold text-gray-700">
-                <a href="/" class="hover:text-brandRed transition-colors py-1">Home</a>
-                <a href="#features" onclick="toggleMobileMenu()" class="hover:text-brandRed transition-colors py-1">Features</a>
-                <a href="mailto:threcius@gmail.com?subject=Umbrella%20App%20Support" class="hover:text-brandRed transition-colors py-1">Contact</a>
+        <div id="mobile-menu" class="page-container mobile-menu">
+            <nav class="mobile-nav-links">
+                <a href="/">Home</a>
+                <a href="#features" onclick="toggleMobileMenu()">Features</a>
+                <a href="mailto:threcius@gmail.com?subject=Umbrella%20App%20Support">Contact</a>
             </nav>
-            <div class="flex sm:hidden items-center gap-3 pt-2">
-                <a href="/buy" class="flex-1 text-center py-2.5 rounded-full border-2 border-brandRed text-brandRed font-bold text-xs">
+            <div class="mobile-btn-row">
+                <a href="/buy" class="btn-buy">
                     Buy
                 </a>
-                <button type="button" onclick="openDownloadModal(); toggleMobileMenu();" class="flex-1 masked-btn masked-btn-red py-2.5 text-xs">
+                <button type="button" onclick="openDownloadModal(); toggleMobileMenu();" class="masked-btn masked-btn-red" style="padding-top: 0.625rem; padding-bottom: 0.625rem; font-size: 0.75rem;">
                     <span class="masked-btn-text">
                         Download
                     </span>
@@ -233,23 +1077,23 @@
     </header>
 
     <!-- Main Hero Section -->
-    <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-8 sm:py-12 my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <main class="page-container hero-section">
         
         <!-- Hero Left Column: Content -->
-        <div class="lg:col-span-5 flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-6 sm:space-y-8 z-10">
-            <h1 class="text-3xl sm:text-5xl lg:text-[56px] font-extrabold text-darkGreen leading-[1.15] lg:leading-[1.12] tracking-tight">
+        <div class="hero-left">
+            <h1 class="hero-title">
                 Capture audio from any app on macOS
             </h1>
 
-            <p class="text-mutedGrey text-sm sm:text-lg leading-relaxed max-w-md font-medium">
+            <p class="hero-desc">
                 Seamlessly isolate and capture per-app audio—Spotify, Zoom, Safari, Discord, or Logic and other apps straight into MP3 or high-efficiency AAC files with zero latency. 
             </p>
 
-            <div class="w-full sm:w-auto">
+            <div class="hero-btn-wrapper">
                 <!-- Hero Download Button -->
-                <button type="button" onclick="openDownloadModal()" class="w-full sm:w-auto masked-btn masked-btn-hero px-8 sm:px-9 py-3.5 sm:py-4 text-sm sm:text-base tracking-wide">
+                <button type="button" onclick="openDownloadModal()" class="masked-btn masked-btn-hero">
                     <span class="masked-btn-text">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                         </svg>
                         Download for Mac
@@ -258,107 +1102,103 @@
             </div>
         </div>
 
-        <!-- Hero Right Column: Scaled on mobile/tablet, original size on desktop -->
-        <div class="lg:col-span-7 flex justify-center items-center w-full overflow-x-auto">
-            <img src="/images/Umbrella-New-UI.png" alt="Umbrella Screenshot" class="w-full max-w-sm sm:max-w-md h-auto lg:max-w-none lg:w-auto lg:h-auto flex-shrink-0 object-contain shadow-xl lg:shadow-none rounded-2xl lg:rounded-none">
+        <!-- Hero Right Column: Screenshot -->
+        <div class="hero-right">
+            <img src="/images/Umbrella-New-UI.png" alt="Umbrella Screenshot" class="hero-img">
         </div>
 
     </main>
 
     <!-- Features Section -->
-    <section id="features" class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-12 sm:py-24">
-        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-tealGreen mb-2 sm:mb-3">Powerful Capabilities</h2>
-            <p class="text-2xl sm:text-4xl font-extrabold text-darkGreen tracking-tight">
+    <section id="features" class="page-container features-section">
+        <div class="features-header">
+            <div class="features-subtitle">Powerful Capabilities</div>
+            <p class="features-title">
                 Everything you need to control and capture macOS audio
             </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div class="features-grid">
             <!-- Feature 1 -->
-            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
-                <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div class="feature-card">
+                <div class="feature-icon teal">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-darkGreen mb-3">Per-App Audio Capture</h3>
-                <p class="text-mutedGrey text-sm leading-relaxed font-medium">
+                <h3>Per-App Audio Capture</h3>
+                <p>
                     Isolate individual application streams without capture bleed from background notifications or other apps.
                 </p>
             </div>
 
             <!-- Feature 2 -->
-            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
-                <div class="w-12 h-12 rounded-2xl bg-brandRed/10 flex items-center justify-center text-brandRed mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div class="feature-card">
+                <div class="feature-icon red">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-darkGreen mb-3">Zero-Latency Engine</h3>
-                <p class="text-mutedGrey text-sm leading-relaxed font-medium">
+                <h3>Zero-Latency Engine</h3>
+                <p>
                     Built natively for Apple Silicon & Intel Macs, capturing audio instantly with negligible CPU usage.
                 </p>
             </div>
 
             <!-- Feature 3 -->
-            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
-                <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div class="feature-card">
+                <div class="feature-icon teal">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-darkGreen mb-3">Multiple Export Formats</h3>
-                <p class="text-mutedGrey text-sm leading-relaxed font-medium">
+                <h3>Multiple Export Formats</h3>
+                <p>
                     Save directly to pristine MP3 or AAC audio formats configured to your preferred bitrates.
                 </p>
             </div>
 
             <!-- Feature 4 -->
-            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
-                <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div class="feature-card">
+                <div class="feature-icon teal">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
-                <div class="flex items-center gap-2 mb-3">
-                    <h3 class="text-xl font-bold text-darkGreen">Automatic Timed Recording</h3>
-                    <span class="px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-tealGreen/10 text-tealGreen flex-shrink-0">
-                        Coming Soon
-                    </span>
+                <div class="feature-title-row">
+                    <h3>Automatic Timed Recording</h3>
+                    <span class="badge-coming-soon">Coming Soon</span>
                 </div>
-                <p class="text-mutedGrey text-sm leading-relaxed font-medium">
-                  Schedule audio recordings and set auto-stop timers with ease.
+                <p>
+                    Schedule audio recordings and set auto-stop timers with ease.
                 </p>
             </div>
 
             <!-- Feature 5 -->
-            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-darkGreen/5 flex flex-col">
-                <div class="w-12 h-12 rounded-2xl bg-brandRed/10 flex items-center justify-center text-brandRed mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div class="feature-card">
+                <div class="feature-icon red">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-darkGreen mb-3">Private & Local First</h3>
-                <p class="text-mutedGrey text-sm leading-relaxed font-medium">
+                <h3>Private & Local First</h3>
+                <p>
                     Your audio never leaves your machine. All processing happens 100% locally on your Mac for total privacy.
                 </p>
             </div>
 
             <!-- Feature 6 (Placeholder) -->
-            <div class="feature-card p-6 sm:p-8 rounded-3xl border border-dashed border-darkGreen/20 flex flex-col bg-white/50 backdrop-blur-sm">
-                <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 flex items-center justify-center text-tealGreen mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div class="feature-card feature-card-dashed">
+                <div class="feature-icon teal">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
                 </div>
-                <div class="flex items-center gap-2 mb-3">
-                    <h3 class="text-xl font-bold text-darkGreen">More Features</h3>
-                    <span class="px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full bg-tealGreen/10 text-tealGreen flex-shrink-0">
-                        Coming Soon
-                    </span>
+                <div class="feature-title-row">
+                    <h3>More Features</h3>
+                    <span class="badge-coming-soon">Coming Soon</span>
                 </div>
-                <p class="text-mutedGrey text-sm leading-relaxed font-medium">
+                <p>
                     We are constantly building new audio capabilities. Stay tuned for upcoming tools and power features.
                 </p>
             </div>
@@ -366,70 +1206,70 @@
     </section>
 
     <!-- Download Modal -->
-    <div id="download-modal" class="hidden-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-darkGreen/40 backdrop-blur-md" onclick="handleBackdropClick(event)">
-        <div id="modal-content" class="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 max-w-md w-full border border-darkGreen/10 relative">
+    <div id="download-modal" class="hidden-modal" onclick="handleBackdropClick(event)">
+        <div id="modal-content">
             <!-- Close Button -->
-            <button onclick="closeDownloadModal()" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-gray-400 hover:text-darkGreen transition-colors p-1 rounded-full">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onclick="closeDownloadModal()" class="modal-close-btn" aria-label="Close modal">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
 
             <!-- Modal Header -->
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 rounded-2xl bg-tealGreen/10 text-tealGreen mx-auto flex items-center justify-center mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="modal-header">
+                <div class="modal-header-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl sm:text-2xl font-extrabold text-darkGreen">Choose your Mac Architecture</h3>
-                <p class="text-mutedGrey text-xs sm:text-sm font-medium mt-1">Select the version optimized for your system</p>
+                <h3>Choose your Mac Architecture</h3>
+                <p>Select the version optimized for your system</p>
             </div>
 
             <!-- Download Options -->
-            <div class="space-y-3">
+            <div class="modal-options">
                 <!-- Apple Silicon Button -->
-                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/v1.2/Umbrella-Silicon-v1.2.dmg" class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-darkGreen/10 hover:border-tealGreen hover:bg-tealGreen/5 transition-all duration-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-darkGreen/5 group-hover:bg-tealGreen group-hover:text-white text-darkGreen flex items-center justify-center transition-colors flex-shrink-0">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/v1.2/Umbrella-Silicon-v1.2.dmg" class="arch-card">
+                    <div class="arch-card-left">
+                        <div class="arch-icon">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 3.84c.64-.78 1.08-1.85.96-2.94-.93.04-2.07.62-2.74 1.4-.6.69-1.12 1.79-.98 2.86 1.04.08 2.12-.54 2.76-1.32z"/>
                             </svg>
                         </div>
-                        <div class="text-left">
-                            <div class="font-bold text-darkGreen group-hover:text-tealGreen transition-colors text-sm sm:text-base">Apple Silicon</div>
-                            <div class="text-[11px] sm:text-xs text-mutedGrey font-medium">M1, M2, M3, M4 or newer</div>
+                        <div class="arch-info">
+                            <div class="arch-name">Apple Silicon</div>
+                            <div class="arch-sub">M1, M2, M3, M4 or newer</div>
                         </div>
                     </div>
-                    <span class="text-xs font-bold text-tealGreen bg-tealGreen/10 px-2.5 sm:px-3 py-1 rounded-full flex-shrink-0 ml-2">Download</span>
+                    <span class="arch-tag teal">Download</span>
                 </a>
 
                 <!-- Intel Chip Button -->
-                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/v1.2/Umbrella-Intel-v1.2.dmg" class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-darkGreen/10 hover:border-brandRed hover:bg-brandRed/5 transition-all duration-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-darkGreen/5 group-hover:bg-brandRed group-hover:text-white text-darkGreen flex items-center justify-center transition-colors flex-shrink-0">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="https://github.com/Umbrella-Mac-App/Umbrella-App-Host/releases/download/v1.2/Umbrella-Intel-v1.2.dmg" class="arch-card intel">
+                    <div class="arch-card-left">
+                        <div class="arch-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
                             </svg>
                         </div>
-                        <div class="text-left">
-                            <div class="font-bold text-darkGreen group-hover:text-brandRed transition-colors text-sm sm:text-base">Intel Chip</div>
-                            <div class="text-[11px] sm:text-xs text-mutedGrey font-medium">Older Intel-based Macs</div>
+                        <div class="arch-info">
+                            <div class="arch-name">Intel Chip</div>
+                            <div class="arch-sub">Older Intel-based Macs</div>
                         </div>
                     </div>
-                    <span class="text-xs font-bold text-brandRed bg-brandRed/10 px-2.5 sm:px-3 py-1 rounded-full flex-shrink-0 ml-2">Download</span>
+                    <span class="arch-tag red">Download</span>
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Footer Space -->
-    <footer class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 py-6 sm:py-8 text-center text-xs text-mutedGrey">
-      &copy; 2026 <a href="https://www.pixelegg.me">Pixel Egg Studio</a>. All rights reserved.
-        <div id="privacy">
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 <a href="https://www.pixelegg.me">Pixel Egg Studio</a>. All rights reserved.
+        <div class="footer-link-item">
             <a href="/privacy">Privacy Policy</a>
         </div>
-        <div id="terms">
+        <div class="footer-link-item">
             <a href="/terms">Terms of Service</a>
         </div>
     </footer>
@@ -441,7 +1281,7 @@
             const openIcon = document.getElementById('menu-icon-open');
             const closeIcon = document.getElementById('menu-icon-close');
             
-            menu.classList.toggle('hidden');
+            menu.classList.toggle('show');
             openIcon.classList.toggle('hidden');
             closeIcon.classList.toggle('hidden');
         }
